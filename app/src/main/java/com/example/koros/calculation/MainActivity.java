@@ -10,7 +10,6 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
-    EditText editText;
     Button button;
 
     View.OnClickListener buttonListener = new View.OnClickListener() {
@@ -117,9 +116,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         //オールクリア
-//        Button buttonAllClear = (Button) findViewById(R.id.button_allClear);
-//        buttonAllClear.setOnClickListener(buttonListener);
-//        buttonAllClear.setOnClickListener(buttonNumberListener);
+        Button buttonAllClear = (Button) findViewById(R.id.button_allClear);
+        buttonAllClear.setOnClickListener(buttonListener);
+
+        //パーセント
+        Button buttonPercent = (Button) findViewById(R.id.button_percent);
+        buttonPercent.setOnClickListener(buttonListener);
+        buttonPercent.setOnClickListener(buttonPercentListener);
 
     }
 
@@ -162,6 +165,23 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
+    //パーセント化
+    double buttonPercent = R.id.button_percent;
+    double result2;
+    View.OnClickListener buttonPercentListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View percentView) {
+            Button percentButton = (Button) percentView;
+            double value = Double.parseDouble(textView.getText().toString());
+            if(buttonPercent == R.id.button_percent){
+                result2 = value / 100;
+            }
+            buttonPercent = percentButton.getId();
+            textView.setText(percentButton.getText());
+            textView.setText(String.valueOf(result2));
+        }
+    };
 
     //計算式メソッド
     double calculation(int operator, double value1, double value2) {
